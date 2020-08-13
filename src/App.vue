@@ -1,28 +1,59 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-container class="col-md-3">
+      <div>
+        <ProductForm :storeProduct="storeProduct" :name="name" />
+      </div>
+      <div class="qtd-produtos-container">Quantidade de produtos: {{qtdProducts}}</div>
+      <div class="product-list-container">
+        <ProductsList :products="products" />
+      </div>
+    </b-container>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ProductForm from "./components/ProductForm";
+import ProductsList from "./components/ProductsList";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    ProductForm,
+    ProductsList,
+  },
+  data() {
+    return {
+      products: [],
+      updated: false,
+    };
+  },
+  computed: {
+    qtdProducts() {
+      return this.products.length;
+    },
+  },
+  methods: {
+    storeProduct(newProduct) {
+      this.products.push(newProduct);
+    },
+  },
+};
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  margin-top: 40px;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #2c3e50; */
+}
+.qtd-produtos-container {
+  margin-top: 20px;
+}
+.product-list-container {
+  margin-top: 20px;
 }
 </style>
